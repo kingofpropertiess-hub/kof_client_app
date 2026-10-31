@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Linking, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import Ionicons from "react-native-vector-icons/Ionicons";
@@ -102,6 +102,35 @@ export function LoginScreen() {
             style={{ marginTop: 8, borderRadius: 14, height: 52 }}
           />
 
+          {/* Play Store Reviewer / Demo Quick Autofill */}
+          <Pressable
+            onPress={() => {
+              setEmail("demo@kingofproperties.com");
+              setPassword("Demo@123456");
+              setErrors({});
+            }}
+            style={({ pressed }) => [
+              styles.demoCard,
+              {
+                borderColor: colors.primary,
+                backgroundColor: colors.chipBg,
+                opacity: pressed ? 0.75 : 1,
+              },
+            ]}
+            accessibilityRole="button"
+            accessibilityLabel="Autofill Demo Reviewer Account"
+          >
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 6 }}>
+              <Ionicons name="key-outline" size={15} color={colors.primary} />
+              <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 13 }}>
+                Play Store Reviewer / Demo Account
+              </Text>
+            </View>
+            <Text style={{ color: colors.textMuted, fontSize: 11.5, marginTop: 3 }}>
+              Tap to fill demo@kingofproperties.com / Demo@123456
+            </Text>
+          </Pressable>
+
           {/* Separator */}
           <View style={styles.divider}>
             <View style={[styles.dividerLine, { backgroundColor: colors.border }]} />
@@ -136,6 +165,16 @@ export function LoginScreen() {
               <Text style={{ color: colors.primary, fontWeight: "800", fontSize: 14 }}>Create an account</Text>
             </Pressable>
           </View>
+
+          <Pressable
+            onPress={() => navigation.navigate("PrivacyPolicy")}
+            hitSlop={8}
+            style={{ alignItems: "center", marginTop: 14 }}
+          >
+            <Text style={{ color: colors.textMuted, fontSize: 12, textDecorationLine: "underline" }}>
+              Privacy Policy & Terms
+            </Text>
+          </Pressable>
         </View>
       </View>
     </SafeAreaView>
@@ -153,4 +192,12 @@ const styles = StyleSheet.create({
   divider: { flexDirection: "row", alignItems: "center", gap: 10 },
   dividerLine: { flex: 1, height: 1, opacity: 0.7 },
   googleIcon: { width: 20, height: 20 },
+  demoCard: {
+    borderWidth: 1,
+    borderRadius: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });

@@ -27,6 +27,7 @@ import { EditProfileScreen } from "../screens/account/EditProfileScreen";
 import { ExpertsScreen } from "../screens/misc/ExpertsScreen";
 import { ExpertDetailScreen } from "../screens/detail/ExpertDetailScreen";
 import { AiChatScreen } from "../screens/misc/AiChatScreen";
+import { PrivacyPolicyScreen } from "../screens/misc/PrivacyPolicyScreen";
 
 import type { AuthStackParamList, TabParamList, MainStackParamList } from "./types";
 
@@ -63,6 +64,7 @@ function AuthStack() {
       <AuthStackNavigator.Screen name="Welcome" component={WelcomeScreen} />
       <AuthStackNavigator.Screen name="Login" component={LoginScreen} />
       <AuthStackNavigator.Screen name="Register" component={RegisterScreen} />
+      <AuthStackNavigator.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
     </AuthStackNavigator.Navigator>
   );
 }
@@ -147,6 +149,7 @@ export function RootNavigator() {
             {/* Guests can sign in without leaving the app, then land back where they were. */}
             <Stack.Screen name="Login" component={LoginScreen} options={{ presentation: "modal" }} />
             <Stack.Screen name="Register" component={RegisterScreen} options={{ presentation: "modal" }} />
+            <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
           </Stack.Navigator>
         )}
       </NavigationContainer>

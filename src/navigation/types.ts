@@ -7,6 +7,7 @@ export type AuthStackParamList = {
   Welcome: undefined;
   Login: { fromGuest?: boolean } | undefined;
   Register: { fromGuest?: boolean } | undefined;
+  PrivacyPolicy: undefined;
 };
 
 /**
@@ -42,6 +43,7 @@ export type MainStackParamList = {
   /** Also reachable from guest mode as modals, so guests can upgrade in place. */
   Login: { fromGuest?: boolean } | undefined;
   Register: { fromGuest?: boolean } | undefined;
+  PrivacyPolicy: undefined;
 };
 
 /**

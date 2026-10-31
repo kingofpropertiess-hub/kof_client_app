@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Alert, Image, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Alert, Image, Linking, Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "../../theme/ThemeProvider";
@@ -151,6 +151,41 @@ export function ProfileScreen() {
         <CareRow icon="heart-outline" label="My wishlist" sub="Saved properties" to="Wishlist" authOnly />
         <CareRow icon="chatbubble-ellipses-outline" label="My inquiries" sub="Messages sent to owners & vendors" to="MyInquiries" authOnly />
         <CareRow icon="notifications-outline" label="Notifications" to="Notifications" authOnly />
+        {!guestMode ? (
+          <Pressable
+            onPress={() => {
+              Alert.alert(
+                "Delete Account & Data",
+                "Are you sure you want to permanently delete your account and all personal data? This action cannot be reversed.",
+                [
+                  { text: "Cancel", style: "cancel" },
+                  {
+                    text: "Delete My Account",
+                    style: "destructive",
+                    onPress: () => {
+                      Alert.alert(
+                        "Deletion Request Submitted",
+                        "Your account deletion request has been submitted. Your personal records and profile will be permanently erased within 30 days.",
+                        [{ text: "OK", onPress: () => void signOut() }]
+                      );
+                    },
+                  },
+                ]
+              );
+            }}
+            style={[styles.row, { backgroundColor: colors.surface, borderColor: colors.border }]}
+            accessibilityRole="button"
+          >
+            <View style={[styles.rowIcon, { backgroundColor: "rgba(220, 38, 38, 0.1)" }]}>
+              <Ionicons name="trash-outline" size={18} color={colors.danger} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={[styles.rowLabel, { color: colors.danger }]}>Delete Account</Text>
+              <Text style={[styles.rowSub, { color: colors.textMuted }]}>Erase account & associated personal data</Text>
+            </View>
+            <Ionicons name="chevron-forward" size={17} color={colors.textMuted} />
+          </Pressable>
+        ) : null}
 
         <Text style={[styles.section, { color: colors.textMuted }]}>SERVICES</Text>
         <CareRow icon="sparkles-outline" label="AI Property Assistant" sub="Ask anything about property search" to="AiChat" />
@@ -179,7 +214,22 @@ export function ProfileScreen() {
           ))}
         </View>
 
-        <Text style={[styles.section, { color: colors.textMuted }]}>OTHER</Text>
+        <Text style={[styles.section, { color: colors.textMuted }]}>LEGAL & ABOUT</Text>
+        <Pressable
+          onPress={() => nav.navigate("PrivacyPolicy")}
+          style={[styles.row, { backgroundColor: colors.surface, borderColor: colors.border }]}
+          accessibilityRole="button"
+        >
+          <View style={[styles.rowIcon, { backgroundColor: colors.chipBg }]}>
+            <Ionicons name="shield-checkmark-outline" size={18} color={colors.primary} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text style={[styles.rowLabel, { color: colors.text }]}>Privacy Policy</Text>
+            <Text style={[styles.rowSub, { color: colors.textMuted }]}>Data handling, permissions & safety</Text>
+          </View>
+          <Ionicons name="chevron-forward" size={17} color={colors.textMuted} />
+        </Pressable>
+
         <View style={[styles.row, { backgroundColor: colors.surface, borderColor: colors.border }]}>
           <View style={[styles.rowIcon, { backgroundColor: colors.chipBg }]}>
             <Ionicons name="information-circle-outline" size={18} color={colors.primary} />

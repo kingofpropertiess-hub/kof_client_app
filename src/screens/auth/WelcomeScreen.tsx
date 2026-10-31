@@ -78,7 +78,14 @@ export function WelcomeScreen() {
             <Ionicons name="arrow-forward" size={15} color={colors.textMuted} />
           </Pressable>
           <Text style={[s.terms, { color: colors.textMuted }]}>
-            By continuing, you agree to our Terms & Privacy Policy.
+            By continuing, you agree to our Terms &{" "}
+            <Text
+              onPress={() => navigation.navigate("PrivacyPolicy")}
+              style={{ color: colors.primary, textDecorationLine: "underline" }}
+            >
+              Privacy Policy
+            </Text>
+            .
           </Text>
         </View>
       </ScrollView>
