@@ -9,6 +9,7 @@ import { SplashScreen } from "../screens/splash/SplashScreen";
 import { BottomTabBar } from "../components/BottomTabBar";
 import type { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 
+
 import { WelcomeScreen } from "../screens/auth/WelcomeScreen";
 import { LoginScreen } from "../screens/auth/LoginScreen";
 import { RegisterScreen } from "../screens/auth/RegisterScreen";
